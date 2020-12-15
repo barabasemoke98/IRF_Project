@@ -85,6 +85,21 @@ namespace TBCJ6C_IRF_beadando
 
         }
 
+        private void CountryComboboxValues()
+        {
+            CountryCombo.Items.Clear();
+            var AvaibleCountries = (from x in allCovidCases
+                                    where
+                                    x.continent == (Continent)ContinetnCombo.SelectedItem
+                                    select x.country).Distinct();
+
+            foreach (var y in AvaibleCountries)
+            {
+                CountryCombo.Items.Add(y);
+            }
+            CountryCombo.SelectedIndex = 0;
+        }
+
         /*private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog choofdlog = new OpenFileDialog();
