@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Continent.cs" />
     <Compile Include="Entities\covidCases.cs" />
     <Compile Include="CovidCasesForm.cs">
       <SubType>Form</SubType>

@@ -14,7 +14,7 @@ namespace TBCJ6C_IRF_beadando.Entities
         public int cases { get; set; }
         public int death { get; set; }
         public string country { get; set; }
-        public string continent { get; set; }
+        public Continent continent { get; set; }
 
     }
 }
