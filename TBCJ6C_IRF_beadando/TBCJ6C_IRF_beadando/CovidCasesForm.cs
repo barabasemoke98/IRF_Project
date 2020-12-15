@@ -57,7 +57,7 @@ namespace TBCJ6C_IRF_beadando
                                           select x.continent).Distinct();
                     foreach (var item in distcontinents)
                     {
-                        ContinetnCombo.Items.Add(item);
+                        ContinentCombo.Items.Add(item);
                     }
 
                     var distcountries = (from y in allCovidCases 
@@ -68,12 +68,12 @@ namespace TBCJ6C_IRF_beadando
                         country1.Items.Add(item);
                         country2.Items.Add(item);
                     }
-                    ContinetnCombo.Enabled = true;
+                    ContinentCombo.Enabled = true;
                     CountryCombo.Enabled = true;
                     button1.Enabled = true;
                     button2.Enabled = true;
-                    ContinetnCombo.SelectedIndex = 0;
 
+                    ContinentCombo.SelectedIndex = 0;
                     CountryCombo.SelectedIndex = 0;
                 }
 
@@ -85,12 +85,17 @@ namespace TBCJ6C_IRF_beadando
 
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            LoadCsv();
+        }
+
         private void CountryComboboxValues()
         {
             CountryCombo.Items.Clear();
             var AvaibleCountries = (from x in allCovidCases
                                     where
-                                    x.continent == (Continent)ContinetnCombo.SelectedItem
+                                    x.continent == (Continent)ContinentCombo.SelectedItem
                                     select x.country).Distinct();
 
             foreach (var y in AvaibleCountries)
@@ -99,39 +104,12 @@ namespace TBCJ6C_IRF_beadando
             }
             CountryCombo.SelectedIndex = 0;
         }
-
-        /*private void button1_Click(object sender, EventArgs e)
+        
+        private void ContinentCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OpenFileDialog choofdlog = new OpenFileDialog();
-            //choofdlog.Filter = "CSV files (.csv)|.csv";
-            choofdlog.Multiselect = false;
-            if (choofdlog.ShowDialog()==DialogResult.OK)
-            {
-                csvpath = choofdlog.FileName.ToString();
+            CountryComboboxValues();
+        }
 
-                using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
-                {
 
-                    while (!sr.EndOfStream)
-                    {
-                        var line = sr.ReadLine().Split(';');
-                        allCovidCases.Add(new covidCases()
-                        {
-                            day = int.Parse(line[0]),
-                            month = int.Parse(line[1]),
-                            year = int.Parse(line[2]),
-                            cases = int.Parse(line[3]),
-                            death = int.Parse(line[4]),
-                            country = line[5],
-                            continent = line[6]
-                        });
-                       
-                    }
-                }
-                
-                dataGridView1.DataSource = allCovidCases.ToList();
-            }
-            
-        }*/
     }
 }
