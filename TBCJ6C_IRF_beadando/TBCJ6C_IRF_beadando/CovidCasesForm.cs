@@ -104,12 +104,10 @@ namespace TBCJ6C_IRF_beadando
             }
             CountryCombo.SelectedIndex = 0;
         }
-        
+
         private void ContinentCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             CountryComboboxValues();
         }
-
-
     }
 }
