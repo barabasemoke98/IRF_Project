@@ -16,7 +16,7 @@ namespace TBCJ6C_IRF_beadando
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new CovidCasesForm());
         }
     }
 }
