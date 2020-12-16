@@ -8,8 +8,8 @@ namespace TBCJ6C_IRF_beadando.Entities
 {
     public class Users
     {
-        string userName { get; set; }
-        string Password { get; set; }
-        bool Permission { get; set; }
+        public string userName { get; set; }
+        public string Password { get; set; }
+        public bool Permission { get; set; }
     }
 }
