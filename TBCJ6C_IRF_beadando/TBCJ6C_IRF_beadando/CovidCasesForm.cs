@@ -86,11 +86,7 @@ namespace TBCJ6C_IRF_beadando
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            LoadCsv();
-        }
-
+       
         private void CountryComboboxValues()
         {
             CountryCombo.Items.Clear();
@@ -106,10 +102,6 @@ namespace TBCJ6C_IRF_beadando
             CountryCombo.SelectedIndex = 0;
         }
 
-        private void ContinentCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CountryComboboxValues();
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -162,5 +154,59 @@ namespace TBCJ6C_IRF_beadando
             }
             else MessageBox.Show("Hibás adatok!");
         }
+
+        private void ContinentCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CountryComboboxValues();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var c1cases = (from x in allCovidCases
+                           where x.country == country1.SelectedItem.ToString() &&
+                                 DateTime.Parse(x.year + "." + x.month + "." + x.day + ".") >= startdate.Value.AddDays(-1)
+
+               && DateTime.Parse(x.year + "." + x.month + "." + x.day + ".") <= enddate.Value
+                           select x.cases).Sum();
+
+            var c2cases = (from x in allCovidCases
+                           where x.country == country2.SelectedItem.ToString() &&
+                                 DateTime.Parse(x.year + "." + x.month + "." + x.day + ".") >= startdate.Value.AddDays(-1)
+
+               && DateTime.Parse(x.year + "." + x.month + "." + x.day + ".") <= enddate.Value
+                           select x.cases).Sum();
+
+            relLabel.Text = MoreCases(c1cases, c2cases);
+        }
+
+        public string MoreCases(int c1, int c2)
+        {
+
+            if (c1 > c2)
+            {
+                return ">";
+            }
+            else if (c1 < c2)
+            {
+                return "<";
+
+            }
+            else if (c1 == c2)
+            {
+                return "=";
+            }
+            else
+            {
+                return "Invalid";
+            }
+
+        }
+
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            LoadCsv();
+        }
+
     }
 }
