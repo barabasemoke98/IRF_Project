@@ -68,6 +68,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginCheck.cs" />
     <Compile Include="MoreCases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
