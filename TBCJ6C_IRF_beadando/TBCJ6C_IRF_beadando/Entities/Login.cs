@@ -19,7 +19,7 @@ namespace TBCJ6C_IRF_beadando.Entities
         {
             InitializeComponent();
 
-            string csvpath = "/userData.csv";
+            string csvpath = "userData.csv";
             using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
             {
                 var line = sr.ReadLine().Split(';');

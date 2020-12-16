@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,10 @@ namespace UnitTestCovidCasesSum
 {
     public class LoginCheck
     {
-
+        [Test,
+            TestCase("Alec98", "3650", false),
+            TestCase("Chester37", "4474", true),
+        ]
 
         public void TestLogin(string username, string password, bool permission)
         {
