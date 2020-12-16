@@ -55,10 +55,20 @@
     <Compile Include="CovidCasesForm.Designer.cs">
       <DependentUpon>CovidCasesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Entities\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Users.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CovidCasesForm.resx">
       <DependentUpon>CovidCasesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entities\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
