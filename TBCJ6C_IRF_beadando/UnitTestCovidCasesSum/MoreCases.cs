@@ -10,7 +10,11 @@ namespace UnitTestCovidCasesSum
 {
     class MoreCases
     {
-        [Test]
+        [Test,
+            TestCase(15, 30, "<"),
+            TestCase(30, 30, "="),
+            TestCase(300, 45, ">")
+        ]
         public void SumCases(int c1sum, int c2sum, string expectedResult)
         {
             var ccform = new CovidCasesForm();
