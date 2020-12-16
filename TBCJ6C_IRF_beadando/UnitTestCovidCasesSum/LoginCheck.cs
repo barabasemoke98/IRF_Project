@@ -13,6 +13,7 @@ namespace UnitTestCovidCasesSum
         [Test,
             TestCase("Alec98", "3650", false),
             TestCase("Chester37", "4474", true),
+            TestCase("Zane17", "718011111", true)
         ]
 
         public void TestLogin(string username, string password, bool permission)
