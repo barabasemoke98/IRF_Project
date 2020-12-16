@@ -8,35 +8,52 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
 
 namespace TBCJ6C_IRF_beadando.Entities
 {
     public partial class Login : Form
     {
         List<Users> allusers = new List<Users>();
+        public bool isAllowed { get { return userData(userTxt.Text, pwTxt.Text).Permission; } set { isAllowed = value; } }
 
         public Login()
         {
             InitializeComponent();
-
-            string csvpath = "userData.csv";
+            LoadUsers();
+        }
+        private void LoadUsers()
+        {
+            string csvpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"userData.csv");
             using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
             {
-                var line = sr.ReadLine().Split(';');
-
-                allusers.Add(new Users()
+                while (!sr.EndOfStream)
                 {
-                userName = line[0],
-                Password = line[1],
-                Permission = bool.Parse(line[2])
+                    var line = sr.ReadLine().Split(';');
+
+                    allusers.Add(new Users()
+                    {
+                        userName = line[0],
+                        Password = line[1],
+                        Permission = perm(line[2])
+                    });
                 }
-                );
             }
+        }
+
+        public bool perm(string p)
+        {
+            if (p == "true")
+            {
+                return true;
+            }
+            else { return false; }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
         public Users userData(string userName, string password)
         {

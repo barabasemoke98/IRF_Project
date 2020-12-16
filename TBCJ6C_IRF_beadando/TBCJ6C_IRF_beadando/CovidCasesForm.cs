@@ -105,54 +105,68 @@ namespace TBCJ6C_IRF_beadando
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (startdate.Value < enddate.Value || CountryCombo.SelectedItem == (null) || ContinentCombo.SelectedItem == null)
+            using (var login = new Login())
             {
-                var SelectedCountry = CountryCombo.SelectedItem.ToString();
-
-                var data = (from x in allCovidCases
-                            where x.country == SelectedCountry &&
-
-                      DateTime.Parse(x.year + "." + x.month + "." + x.day + ".") >= startdate.Value.AddDays(-1)
-
-                     && DateTime.Parse(x.year + "." + x.month + "." + x.day + ".") <= enddate.Value
-                            select x);
-
-                dataGridView1.DataSource = data.ToList();
-                var chartData = (from y in data
-                                 select new
-                                 {
-                                     cases = y.cases,
-                                     date = DateTime.Parse(y.year + "." + y.month + "." + y.day + ".")
-                                 });
-                chart1.DataSource = chartData;
+                var result = login.ShowDialog();
+                if (login.isAllowed)
+                {
 
 
+                    if (startdate.Value < enddate.Value || CountryCombo.SelectedItem == (null) || ContinentCombo.SelectedItem == null)
+                    {
+                        var SelectedCountry = CountryCombo.SelectedItem.ToString();
 
-                var series = chart1.Series[0];
-                series.ChartType = SeriesChartType.Line;
-                series.XValueMember = "date";
-                series.YValueMembers = "cases";
-                series.BorderWidth = 2;
+                        var data = (from x in allCovidCases
+                                    where x.country == SelectedCountry &&
 
-                var legend = chart1.Legends[0];
-                legend.Enabled = false;
+                              DateTime.Parse(x.year + "." + x.month + "." + x.day + ".") >= startdate.Value.AddDays(-1)
 
-                var chartArea = chart1.ChartAreas[0];
-                int interval = (int)Math.Round((((enddate.Value - startdate.Value).TotalDays) / 10), 0);
+                             && DateTime.Parse(x.year + "." + x.month + "." + x.day + ".") <= enddate.Value
+                                    select x);
 
-                chart1.Series[0].XValueType = ChartValueType.DateTime;
-                chart1.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd";
-                chart1.ChartAreas[0].AxisX.Interval = interval;
-                chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Days;
-                chart1.ChartAreas[0].AxisX.IntervalOffset = 1;
+                        dataGridView1.DataSource = data.ToList();
+                        var chartData = (from y in data
+                                         select new
+                                         {
+                                             cases = y.cases,
+                                             date = DateTime.Parse(y.year + "." + y.month + "." + y.day + ".")
+                                         });
+                        chart1.DataSource = chartData;
 
 
-                chartArea.AxisX.MajorGrid.Enabled = false;
-                chartArea.AxisY.MajorGrid.Enabled = false;
-                chartArea.AxisY.IsStartedFromZero = false;
+
+                        var series = chart1.Series[0];
+                        series.ChartType = SeriesChartType.Line;
+                        series.XValueMember = "date";
+                        series.YValueMembers = "cases";
+                        series.BorderWidth = 2;
+
+                        var legend = chart1.Legends[0];
+                        legend.Enabled = false;
+
+                        var chartArea = chart1.ChartAreas[0];
+                        int interval = (int)Math.Round((((enddate.Value - startdate.Value).TotalDays) / 10), 0);
+
+                        chart1.Series[0].XValueType = ChartValueType.DateTime;
+                        chart1.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd";
+                        chart1.ChartAreas[0].AxisX.Interval = interval;
+                        chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Days;
+                        chart1.ChartAreas[0].AxisX.IntervalOffset = 1;
+
+
+                        chartArea.AxisX.MajorGrid.Enabled = false;
+                        chartArea.AxisY.MajorGrid.Enabled = false;
+                        chartArea.AxisY.IsStartedFromZero = false;
+
+                    }
+                    else MessageBox.Show("Hibás adatok!");
+                }
+                else
+                {
+                    MessageBox.Show("Nincs megfelelő joga az adatokhoz!");
+                }
 
             }
-            else MessageBox.Show("Hibás adatok!");
         }
 
         private void ContinentCombo_SelectedIndexChanged(object sender, EventArgs e)

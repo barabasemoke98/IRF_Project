@@ -46,6 +46,7 @@
             // 
             this.pwTxt.Location = new System.Drawing.Point(72, 66);
             this.pwTxt.Name = "pwTxt";
+            this.pwTxt.PasswordChar = '*';
             this.pwTxt.Size = new System.Drawing.Size(189, 20);
             this.pwTxt.TabIndex = 1;
             // 
